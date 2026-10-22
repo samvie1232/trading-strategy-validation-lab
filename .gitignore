@@ -1,0 +1,10 @@
+# Broker data and generated outputs are not versioned
+research/data/*
+!research/data/.gitkeep
+research/data_synthetic/
+research/output*/
+__pycache__/
+.pytest_cache/
+*.pyc
+.venv/
+*.ex5
