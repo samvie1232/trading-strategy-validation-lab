@@ -1,0 +1,29 @@
+var nula 0.00010276615233783855
+--- causalidad
+btc {'mode': 'always_on'} ok
+btc {'mode': 'threshold', 'w': 3, 'e': 1.0, 'x': 0.5} ok
+btc {'mode': 'threshold', 'w': 3, 'e': 2.0, 'x': 0.5} ok
+btc {'mode': 'threshold', 'w': 21, 'e': 1.0, 'x': 0.5} ok
+btc {'mode': 'threshold', 'w': 21, 'e': 2.0, 'x': 0.5} ok
+eth {'mode': 'always_on'} ok
+eth {'mode': 'threshold', 'w': 3, 'e': 1.0, 'x': 0.5} ok
+eth {'mode': 'threshold', 'w': 3, 'e': 2.0, 'x': 0.5} ok
+eth {'mode': 'threshold', 'w': 21, 'e': 1.0, 'x': 0.5} ok
+eth {'mode': 'threshold', 'w': 21, 'e': 2.0, 'x': 0.5} ok
+--- monotonia
+{'mode': 'always_on'} [np.float64(0.305), np.float64(0.286), np.float64(0.267)] ok
+{'mode': 'threshold', 'w': 3, 'e': 1.0, 'x': 0.5} [np.float64(0.383), np.float64(0.215), np.float64(0.047)] ok
+{'mode': 'threshold', 'w': 3, 'e': 2.0, 'x': 0.5} [np.float64(0.351), np.float64(0.317), np.float64(0.283)] ok
+{'mode': 'threshold', 'w': 21, 'e': 1.0, 'x': 0.5} [np.float64(0.362), np.float64(0.319), np.float64(0.277)] ok
+{'mode': 'threshold', 'w': 21, 'e': 2.0, 'x': 0.5} [np.float64(0.328), np.float64(0.303), np.float64(0.278)] ok
+--- negativo
+1 rechaza sharpe -1.74 anual -0.2 dsr 0.0
+2 rechaza sharpe -1.93 anual -0.3 dsr 0.0
+3 rechaza sharpe -0.74 anual -0.0 dsr 0.0
+4 rechaza sharpe -1.42 anual -0.1 dsr 0.0
+5 rechaza sharpe -1.28 anual -0.2 dsr 0.0
+aprobados 0
+--- positivo
+1 APRUEBA sharpe 39.26 anual 19.3 dsr 1.0 []
+2 APRUEBA sharpe 39.99 anual 19.5 dsr 1.0 []
+fallas 0
