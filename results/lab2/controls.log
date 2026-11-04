@@ -1,0 +1,92 @@
+--- causalidad (truncar el futuro no cambia lo pasado)
+H1 US500Cash {'thr': 5, 'exit': 'sma5'} ok 25 25
+H1 US500Cash {'thr': 5, 'exit': 'rsi70'} ok 24 24
+H1 US500Cash {'thr': 10, 'exit': 'sma5'} ok 52 52
+H1 US500Cash {'thr': 10, 'exit': 'rsi70'} ok 50 50
+H1 US100Cash {'thr': 5, 'exit': 'sma5'} ok 31 31
+H1 US100Cash {'thr': 5, 'exit': 'rsi70'} ok 31 31
+H1 US100Cash {'thr': 10, 'exit': 'sma5'} ok 48 48
+H1 US100Cash {'thr': 10, 'exit': 'rsi70'} ok 47 47
+H1 US30Cash {'thr': 5, 'exit': 'sma5'} ok 31 31
+H1 US30Cash {'thr': 5, 'exit': 'rsi70'} ok 29 29
+H1 US30Cash {'thr': 10, 'exit': 'sma5'} ok 50 50
+H1 US30Cash {'thr': 10, 'exit': 'rsi70'} ok 48 48
+H1 GER40Cash {'thr': 5, 'exit': 'sma5'} ok 19 19
+H1 GER40Cash {'thr': 5, 'exit': 'rsi70'} ok 19 19
+H1 GER40Cash {'thr': 10, 'exit': 'sma5'} ok 41 41
+H1 GER40Cash {'thr': 10, 'exit': 'rsi70'} ok 39 39
+H2 GOLD {'v': 1} ok 1277 1277
+H2 GOLD {'v': 2} ok 545 545
+H2 GOLD {'v': 3} ok 539 539
+H2 US500Cash {'v': 1} ok 1301 1301
+H2 US500Cash {'v': 2} ok 529 529
+H2 US500Cash {'v': 3} ok 571 571
+H3 GOLD {'n': 20, 'sl': 1.5, 'tp': 2.0} ok 1766 1766
+H3 GOLD {'n': 20, 'sl': 1.5, 'tp': 3.0} ok 1453 1453
+H3 GOLD {'n': 20, 'sl': 2.0, 'tp': 2.0} ok 1417 1417
+H3 GOLD {'n': 20, 'sl': 2.0, 'tp': 3.0} ok 1107 1107
+H3 GOLD {'n': 50, 'sl': 1.5, 'tp': 2.0} ok 1101 1101
+H3 GOLD {'n': 50, 'sl': 1.5, 'tp': 3.0} ok 968 968
+H3 GOLD {'n': 50, 'sl': 2.0, 'tp': 2.0} ok 963 963
+H3 GOLD {'n': 50, 'sl': 2.0, 'tp': 3.0} ok 805 805
+H4 GOLD {'tp': 0.5, 'sl': 0.5} ok 1770 1770
+H4 GOLD {'tp': 0.5, 'sl': 1.5} ok 1318 1318
+H4 GOLD {'tp': 1, 'sl': 1} ok 1307 1307
+H4 GOLD {'tp': 1, 'sl': 2} ok 1110 1110
+H4 US500Cash {'tp': 0.5, 'sl': 0.5} ok 1790 1790
+H4 US500Cash {'tp': 0.5, 'sl': 1.5} ok 1398 1398
+H4 US500Cash {'tp': 1, 'sl': 1} ok 1401 1401
+H4 US500Cash {'tp': 1, 'sl': 2} ok 1189 1189
+H5 GOLD {'tp': 1, 'sl': 1, 'k': 8} ok 857 857
+H5 GOLD {'tp': 1, 'sl': 1, 'k': 15} ok 257 257
+H5 GOLD {'tp': 1, 'sl': 2, 'k': 8} ok 748 748
+H5 GOLD {'tp': 1, 'sl': 2, 'k': 15} ok 228 228
+H5 US500Cash {'tp': 1, 'sl': 1, 'k': 8} ok 967 967
+H5 US500Cash {'tp': 1, 'sl': 1, 'k': 15} ok 540 540
+H5 US500Cash {'tp': 1, 'sl': 2, 'k': 8} ok 852 852
+H5 US500Cash {'tp': 1, 'sl': 2, 'k': 15} ok 491 491
+H6 GOLD {'L': 360, 'z': 1.5} ok 87 87
+H6 GOLD {'L': 360, 'z': 2.0} ok 65 65
+H6 GOLD {'L': 720, 'z': 1.5} ok 44 44
+H6 GOLD {'L': 720, 'z': 2.0} ok 33 33
+--- monotonia de costos
+H1 {'thr': 5, 'exit': 'sma5'} [np.float64(0.133), np.float64(0.092), np.float64(0.083)] ok
+H1 {'thr': 5, 'exit': 'rsi70'} [np.float64(0.194), np.float64(0.144), np.float64(0.135)] ok
+H2 {'v': 1} [np.float64(0.267), np.float64(-1.066), np.float64(-2.358)] ok
+H2 {'v': 2} [np.float64(0.234), np.float64(-0.326), np.float64(-0.874)] ok
+H3 {'n': 20, 'sl': 1.5, 'tp': 2.0} [np.float64(-2.562), np.float64(-3.892), np.float64(-5.154)] ok
+H3 {'n': 20, 'sl': 1.5, 'tp': 3.0} [np.float64(-1.975), np.float64(-3.088), np.float64(-4.157)] ok
+H4 {'tp': 0.5, 'sl': 0.5} [np.float64(-1.381), np.float64(-5.941), np.float64(-10.445)] ok
+H4 {'tp': 0.5, 'sl': 1.5} [np.float64(-0.05), np.float64(-1.087), np.float64(-2.095)] ok
+H5 {'tp': 1, 'sl': 1, 'k': 8} [np.float64(-0.039), np.float64(-0.942), np.float64(-1.794)] ok
+H5 {'tp': 1, 'sl': 1, 'k': 15} [np.float64(0.071), np.float64(-0.251), np.float64(-0.544)] ok
+H6 {'L': 360, 'z': 1.5} [np.float64(-0.652), np.float64(-1.236), np.float64(-1.498)] ok
+H6 {'L': 360, 'z': 2.0} [np.float64(-0.617), np.float64(-1.079), np.float64(-1.27)] ok
+--- control negativo: velas barajadas
+H1 1 rechaza sharpe -0.09 ops 218 zero 0.13 dsr 0.015 47s
+H1 2 rechaza sharpe -0.24 ops 198 zero -0.05 dsr 0.003 2s
+H1 3 rechaza sharpe -0.04 ops 195 zero 0.14 dsr 0.022 2s
+H2 1 rechaza sharpe -0.01 ops 1557 zero 0.6 dsr 0.116 3s
+H2 2 rechaza sharpe -2.11 ops 1617 zero -1.11 dsr 0.0 3s
+H2 3 rechaza sharpe -0.76 ops 1551 zero 0.31 dsr 0.005 3s
+H3 1 rechaza sharpe -1.61 ops 1352 zero -0.82 dsr 0.0 5s
+H3 2 rechaza sharpe -2.39 ops 1424 zero -1.51 dsr 0.0 5s
+H3 3 rechaza sharpe -2.37 ops 1258 zero -1.79 dsr 0.0 5s
+H4 1 rechaza sharpe -2.78 ops 2986 zero -1.51 dsr 0.0 5s
+H4 2 rechaza sharpe -3.24 ops 3054 zero -1.73 dsr 0.0 5s
+H4 3 rechaza sharpe -1.94 ops 2991 zero -0.66 dsr 0.0 4s
+H5 1 rechaza sharpe -2.74 ops 2909 zero -1.49 dsr 0.0 4s
+H5 2 rechaza sharpe -2.57 ops 2500 zero -1.35 dsr 0.0 4s
+H5 3 rechaza sharpe -1.66 ops 2847 zero -0.45 dsr 0.0 4s
+H6 1 rechaza sharpe -0.41 ops 41 zero -0.27 dsr 0.001 4s
+H6 2 rechaza sharpe -0.34 ops 56 zero -0.24 dsr 0.002 3s
+H6 3 rechaza sharpe -0.3 ops 42 zero -0.19 dsr 0.002 4s
+negativos aprobados: 0
+--- control positivo: efecto plantado
+H1 {'phi': -0.3} APRUEBA sharpe 1.46 ops 180 dsr 0.998 falla []
+H2 {'phi': -0.25} APRUEBA sharpe 2.72 ops 853 dsr 1.0 falla []
+H3 {'drift': 0.35} APRUEBA sharpe 14.49 ops 1893 dsr 1.0 falla []
+H4 {'phi': -0.3} APRUEBA sharpe 1.81 ops 1913 dsr 0.99 falla []
+H5 {'phi': -0.3} APRUEBA sharpe 1.72 ops 1765 dsr 0.984 falla []
+H6 plantado APRUEBA sharpe 2.89 ops 195 dsr 1.0 falla []
+fallas estructurales 0

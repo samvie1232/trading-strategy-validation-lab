@@ -1,0 +1,7 @@
+fam,veredicto,oos,ops,sharpe,anual,dd,wfe,pos,mc95,estres,sin_costo,dsr,dsr_real,aciertos,pf,is_anual,fallos
+H1,NO APRUEBA,2017-01-03→2026-11-04,264,0.31,1.3,7.9,0.74,70,15.9,0.29,0.46,0.195,0.0,70.1,1.48,1.7,"['Sharpe fuera de muestra', 'Deflated Sharpe']"
+H2,NO APRUEBA,2023-01-04→2026-11-04,1234,-0.63,-1.7,8.0,,38,17.1,-1.62,0.53,0.007,0.0,59.5,0.89,-0.9,"['Sharpe fuera de muestra', 'Eficiencia walk-forward', 'Ventanas OOS positivas', 'Sharpe con doble costo', 'Deflated Sharpe']"
+H3,NO APRUEBA,2023-01-04→2026-11-04,1084,-1.52,-15.3,50.9,,25,66.7,-2.25,-0.74,0.0,0.0,37.4,0.82,-13.9,"['Sharpe fuera de muestra', 'Eficiencia walk-forward', 'Ventanas OOS positivas', 'Caída p95 Monte Carlo', 'Sharpe con doble costo', 'Deflated Sharpe']"
+H4,NO APRUEBA,2023-01-04→2026-11-04,2572,-2.01,-8.3,29.5,,12,38.6,-4.19,0.42,0.0,0.0,63.5,0.84,-8.7,"['Sharpe fuera de muestra', 'Eficiencia walk-forward', 'Ventanas OOS positivas', 'Caída p95 Monte Carlo', 'Sharpe con doble costo', 'Deflated Sharpe', 'Mejor que azar (p95)']"
+H5,NO APRUEBA,2023-01-04→2026-11-04,1248,-0.79,-2.9,13.9,,12,23.9,-1.6,0.16,0.003,0.0,55.8,0.91,-0.9,"['Sharpe fuera de muestra', 'Eficiencia walk-forward', 'Ventanas OOS positivas', 'Sharpe con doble costo', 'Deflated Sharpe', 'Mejor que azar (p95)']"
+H6,NO APRUEBA,2017-01-03→2026-11-04,78,-1.07,-7.8,58.6,,20,71.7,-1.21,-0.58,0.0,0.0,37.2,0.3,-6.5,"['Operaciones fuera de muestra', 'Sharpe fuera de muestra', 'Eficiencia walk-forward', 'Ventanas OOS positivas', 'Caída p95 Monte Carlo', 'Sharpe con doble costo', 'Deflated Sharpe']"
