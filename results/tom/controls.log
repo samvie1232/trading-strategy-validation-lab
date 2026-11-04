@@ -1,0 +1,38 @@
+var nula 4.158024791776199e-05
+--- causalidad
+US500Cash {'before': 1, 'after': 2} ok 81
+US500Cash {'before': 1, 'after': 3} ok 81
+US500Cash {'before': 2, 'after': 2} ok 82
+US500Cash {'before': 2, 'after': 3} ok 82
+US100Cash {'before': 1, 'after': 2} ok 81
+US100Cash {'before': 1, 'after': 3} ok 81
+US100Cash {'before': 2, 'after': 2} ok 82
+US100Cash {'before': 2, 'after': 3} ok 82
+US30Cash {'before': 1, 'after': 2} ok 81
+US30Cash {'before': 1, 'after': 3} ok 81
+US30Cash {'before': 2, 'after': 2} ok 82
+US30Cash {'before': 2, 'after': 3} ok 82
+GER40Cash {'before': 1, 'after': 2} ok 75
+GER40Cash {'before': 1, 'after': 3} ok 75
+GER40Cash {'before': 2, 'after': 2} ok 82
+GER40Cash {'before': 2, 'after': 3} ok 82
+--- calendario, muestra US500
+2015-01-29 → 2015-02-04
+2015-02-26 → 2015-03-04
+2015-03-30 → 2015-04-03
+--- monotonia
+{'before': 1, 'after': 2} [np.float64(0.106), np.float64(0.03), np.float64(0.005)] ok
+{'before': 1, 'after': 3} [np.float64(0.117), np.float64(0.02), np.float64(-0.004)] ok
+{'before': 2, 'after': 2} [np.float64(0.134), np.float64(0.036), np.float64(0.011)] ok
+{'before': 2, 'after': 3} [np.float64(0.156), np.float64(0.037), np.float64(0.012)] ok
+--- negativo
+1 rechaza sharpe 0.27 dsr 0.538
+2 rechaza sharpe 0.08 dsr 0.308
+3 rechaza sharpe 0.43 dsr 0.731
+4 rechaza sharpe 0.17 dsr 0.423
+5 rechaza sharpe -0.07 dsr 0.164
+aprobados 0
+--- positivo
+1 APRUEBA sharpe 3.8 dsr 1.0 []
+2 APRUEBA sharpe 3.88 dsr 1.0 []
+fallas 0

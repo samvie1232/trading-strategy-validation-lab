@@ -16,24 +16,28 @@
 
 | | |
 |---|---|
-| **Question** | Can a retail algorithm make money trading CFDs at a real broker (XM, MT5) once *all* costs are counted? |
-| **Data** | 13 markets (gold, silver, oil, FX, US/EU indices, crypto) · daily and 4-hour bars since 2015 · 30-minute bars since 2021 · **~1.2M bars with per-bar spread** plus the broker's current swap rates |
-| **Tested** | 9 strategy families from research, books and trader forums · 44 parameter sets · 11,000+ out-of-sample trades |
-| **Answer** | **No, not for these strategies.** None of them passes out-of-sample with spreads and swaps included. The engine rejects data with no edge and detects edges planted on purpose. |
+| **Question** | Can a retail algorithm make money at real broker and exchange costs once *all* costs are counted? |
+| **Data** | 13 markets (gold, silver, oil, FX, US/EU indices, crypto) · daily and 4-hour bars since 2015 · 30-minute bars since 2021 · **~1.2M bars with per-bar spread** plus the broker's current swap rates · BTC and ETH funding from a third-party Binance dataset |
+| **Tested** | 11 strategy families from research, books and trader forums · 53 parameter sets · 12,000+ out-of-sample trades |
+| **Answer** | **No, not for these strategies.** None of them passes out-of-sample once costs are included. The engine rejects data with no edge and detects edges planted on purpose. |
 
 | Strategy family | Out-of-sample period | OOS trades | OOS Sharpe | OOS annual return | Sharpe with no costs* | Verdict |
 |---|---|---:|---:|---:|---:|---|
 | Multi-market trend following (D1) | 2017 → 2026 | 390 | −0.18 | −0.9% | 0.22 | ❌ |
 | Intraday momentum, US indices (M30) | 2023 → 2026 | 2,391 | −1.83 | −10.5% | −0.69 | ❌ |
 | Asian-range breakout (M30) | 2023 → 2026 | 2,446 | −1.67 | −7.7% | 0.55† | ❌ |
-| Connors RSI(2), indices (D1, long only) | 2017 → 2026 | 264 | 0.31 | +1.3% | 0.46 | ❌ Closest, below Sharpe 0.5 |
+| Connors RSI(2), indices (D1, long only) | 2017 → 2026 | 264 | 0.31 | +1.3% | 0.46 | ❌ Below Sharpe 0.5 |
 | RSI(2), gold and US500 (M30) | 2023 → 2026 | 1,234 | −0.63 | −1.7% | 0.53 | ❌ |
 | Channel breakout, gold (H1) | 2023 → 2026 | 1,084 | −1.52 | −15.3% | −0.74 | ❌ |
 | Quick exits, 64% win rate (M30) | 2023 → 2026 | 2,572 | −2.01 | −8.3% | 0.42 | ❌ |
 | Quick exits + cost filter (M30) | 2023 → 2026 | 1,248 | −0.79 | −2.9% | 0.16 | ❌ |
 | Gold/silver relative value (H4) | 2017 → 2026 | 78 | −1.07 | −7.8% | −0.58 | ❌ |
+| Month-turn effect, indices (D1, long only) | 2017 → 2026 | 468 | 0.25 | +1.0% | 0.43 | ❌ No better than random windows |
+| Delta-neutral funding carry, BTC and ETH | 2022 → Apr 2026 | 9‡ | 2.32‡ | +0.7%‡ | 3.99‡ | ❌ Barely above cash |
 
 \* No spread, slippage or swap. Reference only; it never counts toward approval.
+
+‡ Excess over an assumed 4% cash return, annualized over 365 days. The 9 trades collected 2,514 funding payments. The high Sharpe reflects a very smooth daily curve and misses platform and intraday risk.
 
 † Matches what the same code produces on pure random-walk data (Sharpe 0.55 vs 0.49), so it is a fill-model artifact, not an edge. See [Findings](#findings).
 
@@ -150,7 +154,14 @@ Lab v2's controls shuffle the real bars and plant known effects: 0 of 18 shuffle
 - **Connors RSI(2) on daily indices is the closest:** Sharpe 0.31, 0.42 without swap and 0.46 with no costs, all below the 0.5 required. Its Deflated Sharpe is 0.20 in the corrected run, against 0.95 required.
 - **Commercial bots were not bought or audited.** The H1 breakout tests a generic public rule of that style, not any vendor's code, so it says nothing about a specific product.
 
-Reports: [Lab v2 results](results/lab2/RESULTADOS.md) · [core families, Nov 2026](results/report_2026-11-04.md) · [original Oct 2026 report](results/report_2026-10-22.md).
+**5. Structural ideas: a real payment, too small after costs.** I then tested two ideas with an economic reason behind them, again with rules written in advance:
+
+- **Funding carry is real but compressed.** BTC funding fell from about 30.6% a year in 2021 to 5.1% in 2025 and 1.3% in early 2026. It passed five of eight criteria, but earned only 0.68% a year above the cash assumption and about −0.1% over the last 24 months. Daily data cannot see exchange failure or auto-deleveraging, so even a pass would not justify real money by itself.
+- **The month-turn effect did not beat chance.** The average trade landed at the 57th percentile of random windows of the same length, so it looks like ordinary market exposure.
+
+Buying and holding US500Cash returned 6.3% a year in the same period (Sharpe 0.43, 34.6% drawdown), a context figure rather than part of the test.
+
+Reports: [Lab v2 results](results/lab2/RESULTADOS.md) · [core families, Nov 2026](results/report_2026-11-04.md) · [original Oct 2026 report](results/report_2026-10-22.md) · [funding carry](results/funding/RESULTADOS.md) · [month turn](results/tom/RESULTADOS.md).
 
 ---
 
@@ -210,6 +221,8 @@ XM_SWAP_MODEL=legacy_fixed XM_OUT_DIR=output_lab2_prereg python lab2_run.py  # a
 │   ├── lab2.py               # Lab v2: six pre-registered families and Deflated Sharpe
 │   ├── lab2_run.py           # Runs Lab v2 on real data
 │   ├── lab2_controls.py      # Shuffled and planted-effect controls
+│   ├── lab_funding*.py       # Funding carry test (needs a funding dataset in data_funding/)
+│   ├── lab_tom*.py           # Month-turn test with a random-window baseline
 │   ├── make_synthetic.py     # Synthetic data in MT5 export format
 │   └── tests/                # Controls, look-ahead, cost monotonicity
 ├── results/                  # Real-data reports (Oct and Nov 2026) and Lab v2 records
@@ -222,7 +235,8 @@ XM_SWAP_MODEL=legacy_fixed XM_OUT_DIR=output_lab2_prereg python lab2_run.py  # a
 
 - No historical swap data: today's rates are applied to the full history, which overstates costs in low-rate years. Results are also reported with no swap.
 - Spreads come from a demo account, and slippage is assumed rather than measured live.
-- These results cover the strategies tested with this broker's costs. They do not prove that no profitable strategy exists.
+- Funding data comes from a third-party repository, ends in April 2026, and uses fee levels from secondary sources.
+- These results cover the strategies tested at these costs. They do not prove that no profitable strategy exists.
 - 30-minute bars cannot resolve the price path inside a bar; tick data would remove that assumption.
 - One broker and one cost structure. A natural next experiment is running the same engine on **exchange-traded futures or ETFs**, where there is no daily CFD swap and costs are lower.
 - Planned: Parquet storage, orchestration (Airflow/Prefect) for scheduled refreshes, and a Power BI dashboard on the walk-forward outputs.
