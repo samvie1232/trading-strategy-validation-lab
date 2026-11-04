@@ -6,6 +6,8 @@ from pathlib import Path
 import numpy as np
 import pandas as pd
 
+import config as C
+
 
 def load_specs(data_dir: Path) -> pd.DataFrame:
     path = data_dir / "symbols_spec.csv"
@@ -53,7 +55,7 @@ def load_bars(data_dir: Path, symbol: str, timeframe: str, specs: pd.DataFrame) 
 
 def swap_fractions(symbol: str, close: pd.Series, specs: pd.DataFrame):
     """Swap por noche como fracción del nocional (positivo = te pagan, negativo = te cobran).
-    Usa el swap ACTUAL del símbolo para todo el historial (aproximación)."""
+    Usa el swap ACTUAL del símbolo para todo el historial (aproximación); ver C.SWAP_MODEL."""
     nan = pd.Series(np.nan, index=close.index)
     if symbol not in specs.index:
         return nan, nan
@@ -75,6 +77,12 @@ def swap_fractions(symbol: str, close: pd.Series, specs: pd.DataFrame):
             out.append(sw / notional_per_lot)
         else:
             out.append(nan)
+    if C.SWAP_MODEL == "zero":
+        return pd.Series(0.0, index=close.index), pd.Series(0.0, index=close.index)
+    if C.SWAP_MODEL == "constant_pct":
+        return tuple(pd.Series(float(x.iloc[-1]), index=close.index) for x in out)
+    if C.SWAP_MODEL != "legacy_fixed":
+        raise ValueError(f"SWAP_MODEL desconocido: {C.SWAP_MODEL}")
     return out[0], out[1]
 
 

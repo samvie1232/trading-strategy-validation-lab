@@ -23,6 +23,12 @@ SLIPPAGE_FRAC_OF_SPREAD = 0.25 # Deslizamiento extra = 25% del spread por operac
 STOP_FILL_SLIPPAGE = 0.5       # Órdenes stop (rupturas y stop loss): se llenan 0.5 spread peor que el nivel
 USE_REAL_SWAPS = True          # Usa los swaps reales de XM (symbols_spec.csv) para posiciones de varios días
 FINANCING_ANNUAL = 0.06        # Solo si no hay swaps reales: costo aprox. anual del nocional
+# Cómo se lleva el swap actual del bróker al pasado (no hay swap histórico):
+#   constant_pct: el % sobre el nocional de hoy se aplica a toda la historia (por defecto).
+#   legacy_fixed: el swap en puntos/moneda se fija y se divide por el precio de cada fecha.
+#                 Sobreestima el costo cuando el precio era menor (oro 2017: -22.8%/año vs -6.4% en 2026).
+#   zero:         sin swap (diagnóstico).
+SWAP_MODEL = os.environ.get("XM_SWAP_MODEL", "constant_pct")
 
 # ------------------------------------------------------------------
 # Walk-forward y Monte Carlo
